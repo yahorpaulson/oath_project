@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello friend!</title>
+</head>
+<body>
+    <h1>Hello friend!</h1>
+    <p>Welcome to OAuth 2.0</p>
+    <h1>Welcome, <span th:text="${username} ?: 'Guest'"></span>!</h1>
+
+    <div th:if="${username}">
+        <a href="/logout">Logout</a>
+    </div>
+    <div th:if="${username == null}">
+        <a href="/oauth2/authorization/github">Login with GitHub</a>
+    </div>
+</body>
+</html>
