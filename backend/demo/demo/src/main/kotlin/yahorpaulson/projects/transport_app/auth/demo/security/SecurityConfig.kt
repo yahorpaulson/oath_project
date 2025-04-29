@@ -4,9 +4,10 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.web.SecurityFilterChain
+import yahorpaulson.projects.transport_app.auth.demo.service.UserService
 
 @Configuration
-class SecurityConfig {
+class SecurityConfig (private val userService: UserService){
 
     @Bean
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
@@ -18,8 +19,11 @@ class SecurityConfig {
                     .requestMatchers("/user/**").hasRole("USER")
                     .anyRequest().authenticated()
             }
-            .oauth2Login{
-                oauth2 -> oauth2.defaultSuccessUrl("/", true)
+            .oauth2Login {
+                it.userInfoEndpoint {
+                    it.userService(userService)
+                }
+                it.defaultSuccessUrl("/", true)
             }
             .logout {
                 logout -> logout.logoutSuccessUrl("/")

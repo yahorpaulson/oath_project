@@ -13,6 +13,7 @@ class HomeController {
     fun index(@AuthenticationPrincipal oauth2User: OAuth2User?, model: Model): String{
         if(oauth2User != null){
             model.addAttribute("username", oauth2User.getAttribute<String>("login"))
+
         } else {
             model.addAttribute("username", null)
         }
