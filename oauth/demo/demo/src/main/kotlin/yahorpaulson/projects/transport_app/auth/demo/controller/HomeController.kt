@@ -14,6 +14,7 @@ class HomeController {
         if(oauth2User != null){
             model.addAttribute("username", oauth2User.getAttribute<String>("login"))
 
+
         } else {
             model.addAttribute("username", null)
         }

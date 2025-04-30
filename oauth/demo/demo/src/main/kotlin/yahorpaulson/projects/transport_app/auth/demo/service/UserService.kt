@@ -33,14 +33,11 @@ class UserService(
             } else {
                 authorities.add(SimpleGrantedAuthority("ROLE_USER"))
             }
-
             return DefaultOAuth2User(
                     authorities,
                     oAuth2User.attributes,
                 "login"
 
-
             )
-
         }
     }
